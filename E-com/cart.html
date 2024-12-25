@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <style>
+        /* Reset and basic styling */
+
+        *{
+            padding: 0;margin:0;
+        }
+        body{
+            background-color: beige;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background: brown;
+            box-shadow: 15px;
+        }
+        h2{
+            text-align: center;
+            margin: 10px;
+            color: brown;
+        }
+        li{
+            list-style: none;
+        }
+        #brandLogo{
+            height: 100%;
+            width: 50px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        a{
+            display: inline-block;
+            padding: 10px;
+            background: brown;
+            color: beige;
+            text-decoration: none;
+        }
+        .dropdown{
+            position: relative;
+        }
+        .dropdown-content{
+            display: none;
+            position: absolute;
+            padding: 10px;
+            top: 20px;
+            z-index: 2;
+        }
+        .dropdown-content a{
+            width: 100px;
+        }
+        .dropdown:hover .dropdown-content{
+            display: block;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form input{
+            background: beige;
+            color: brown;
+            font-size: larger;
+        }
+        form button{
+            border-radius: 5px;
+        }
+        #search{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+        }
+        .searchbtn{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+            margin: 0 10px;
+        }
+
+#cart-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+#cart-items {
+    background: beige;
+    border: 1px solid beige;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#cart-items li{
+    background-color: brown;
+}
+
+#cart-items img {
+    height: 200px;
+    width: 200px;
+    /* max-width: 100%; */
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+#cart-items h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: black;
+}
+
+#cart-items p {
+    font-size: 16px;
+    color: beige;
+}
+
+#cart-items button {
+    margin: 10px;
+    font-size: 20px;
+    color: beige;
+    background-color: brown;
+}
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <li><img id="brandLogo" src="SmallSquareLogoJpg.jpg" alt="Brand-Logo"></li>
+        <li><a href="e-com.html">HOME</a></li>
+        <li><a href="aboutus.html">ABOUT-US</a></li>
+            <li class="dropdown">
+                <a href="contactus.html">CONTACT-US</a>
+            </li>
+            <li class="dropdown">
+            <a href="#">OUR-PRODUCTS</a>
+            <div class="dropdown-content">
+                <a href="category.html?category=smartphones">Smartphones</a>
+                <a href="category.html?category=groceries">Groceries</a>
+                <a href="category.html?category=skin-care">Skincare</a>
+            </div>
+            </li>
+            <li><a href="cart.html">MY CART</a></li>
+            <li><a href="wishlist.html">WISHLIST</a></li>
+
+            <form action="search.html">
+                <input type="text" name="query" placeholder="search here">
+                <button class="searchbtn" type="submit">Search</button>
+            </form>
+    </nav>
+
+    <h2>Your Cart</h2>
+    <div id="cart">
+        <ul id="cart-items"></ul>
+        <p id="total-price">Total: $0</p>
+    </div>
+
+    <script>
+        // Fetch cart data from localStorage and process it
+        let cart = JSON.parse(localStorage['cart'])
+        let s = new Set(cart)
+        cart = [...s]
+        localStorage['cart'] = JSON.stringify(cart);
+        let cartItems = [];
+
+        // Fetch product details for each cart item
+        const getData = async () => {
+                for (let id of cart) {
+                    let response = await fetch(`https://dummyjson.com/products/${id}`);
+                    let data = await response.json();
+                    cartItems.push(data);
+                }
+                updateCartUI();
+        };
+
+        // Update the UI with cart items and total price
+        const updateCartUI = () => {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalPriceElement = document.getElementById('total-price');
+
+            cartItemsContainer.innerHTML = '';
+            let totalPrice = 0;
+
+            cartItems.forEach(item => {
+                totalPrice += item.price;
+
+                const cartItem = document.createElement('li');
+                cartItem.innerHTML = `
+                    <img src="${item.thumbnail}" alt="${item.title}"/>
+                    <h3>${item.title}</h3>
+                    <p>Price: $${item.price}</p>
+                    <button onclick="removeFromCart(${item.id})">Remove</button>
+                `;
+
+                cartItemsContainer.appendChild(cartItem);
+            });
+            totalPriceElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
+        };
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(ele => ele !== itemId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            cartItems = cartItems.filter(item => item.id !== itemId);
+            updateCartUI();
+        }
+
+        getData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <a id="search-html" href="search.html"></a>
+    <title>Product Categories</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: beige;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        background: brown;
+        box-shadow: 15px;
+      }
+      li {
+        list-style: none;
+      }
+      #brandLogo {
+        height: 100%;
+        width: 50px;
+        margin: 5px;
+        border-radius: 10px;
+      }
+      a {
+        display: inline-block;
+        padding: 10px;
+        background: brown;
+        color: beige;
+        text-decoration: none;
+      }
+      .dropdown {
+        position: relative;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        padding: 10px;
+        top: 20px;
+      }
+      .dropdown-content a {
+        width: 100px;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      form input {
+        background: beige;
+        color: brown;
+        font-size: larger;
+      }
+      form button {
+        border-radius: 5px;
+      }
+      #search {
+        background-color: beige;
+        color: brown;
+        font-size: large;
+      }
+      .searchbtn {
+        background-color: beige;
+        color: brown;
+        font-size: large;
+        margin: 0 10px;
+      }
+      #products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin: 5%;
+        background-color: brown;
+      }
+      #products .product-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        overflow: hidden;
+      }
+      #products .product-card a {
+        text-decoration: none;
+      }
+      #products .product-card a img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+      }
+      #products .product-card h3 {
+            margin: 10px 0;
+            color: black;
+        }
+        #products .product-card p {
+            color: white;
+        }
+        #products .product-card button {
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: rgb(187, 29, 29);
+            color: beige;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #products .product-card button:hover {
+            background-color: rgb(128, 10, 10);
+        }
+        #products p {
+            text-align: center;
+            color: beige;
+            font-size: 18px;
+        }
+      #search-html {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <li>
+        <img id="brandLogo" src="SmallSquareLogoJpg.jpg" alt="Brand-Logo" />
+      </li>
+      <li><a href="e-com.html">HOME</a></li>
+      <li><a href="aboutus.html">ABOUT-US</a></li>
+      <li class="dropdown">
+        <a href="contactus.html">CONTACT</a>
+      </li>
+      <li class="dropdown">
+        <a href="#">OUR-PRODUCTS</a>
+        <div class="dropdown-content">
+          <a href="category.html?category=smartphones">Smartphones</a>
+          <a href="category.html?category=groceries">Groceries</a>
+          <a href="category.html?category=skin-care">Skincare</a>
+        </div>
+      </li>
+      <li><a href="cart.html">MY CART</a></li>
+      <li><a href="wishlist.html">WISHLIST</a></li>
+
+      <form action="search.html">
+        <input type="text" name="query" placeholder="search here" />
+        <button class="searchbtn" type="submit">Search</button>
+      </form>
+    </nav>
+
+    <div id="products"></div>
+    <script>
+      const queryString = window.location.search;
+      const params = new URLSearchParams(queryString);
+      const category = params.get("category");
+
+      let productsContainer = document.getElementById("products");
+
+      if (!category) {
+        productsContainer.innerHTML = "<p>Please select a valid category.</p>";
+        throw new Error("Category parameter is missing or invalid.");
+      }
+
+      productsContainer.innerHTML = "<p>Loading products...</p>";
+
+      fetch("https://dummyjson.com/products/category/" + category)
+        .then((res) => res.json())
+        .then((data) => displayProducts(data.products))
+        .catch((err) => {
+          productsContainer.innerHTML =
+            "<p>Failed to load products. Please try again later.</p>";
+          console.error("Error fetching products:", err);
+        });
+
+      function displayProducts(products) {
+        productsContainer.innerHTML = "";
+
+        products.forEach((product) => {
+          const productCard = document.createElement("div");
+          productCard.classList.add("product-card");
+          productCard.innerHTML = `
+                    <a href="singleProduct.html?id=${product.id}">
+                    <img src="${
+                      product.images[0] || "https://via.placeholder.com/300x200"
+                    }" alt="${product.title}">
+                    </a>
+                    <h3>${product.title}</h3>
+                    <p>Price: $${product.price}</p>
+                    <button onclick="addToCart(${
+                      product.id
+                    })">Add to Cart</button>
+                    <button onclick="addToWishlist(${
+                      product.id
+                    })">Add to Wishlist</button>`;
+          productsContainer.appendChild(productCard);
+        });
+      }
+
+      if(!localStorage['cart']){
+          localStorage.setItem('cart','[]')
+      }
+
+
+      // Function to add an item to the cart
+      function addToCart(itemId) {
+          let cart = JSON.parse(localStorage.getItem("cart"));
+          if (cart.includes(itemId)) {
+            alert("This item is already in your cart!");
+            return;
+          }
+          cart.push(itemId);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert(`Product ${itemId} added to cart!`);
+
+      }
+
+
+      if(!localStorage['wishlist']){
+          localStorage.setItem('wishlist','[]')
+      }
+
+      function addToWishlist(productId) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+        if (wishlist.includes(productId)) {
+            alert("This item is already in your wishlist!");
+            return;
+          }
+        wishlist.push(productId);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert(`Product ${productId} added to wishlist!`);
+      }
+    </script>
+  </body>
+</html>

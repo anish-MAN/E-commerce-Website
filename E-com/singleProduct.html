@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product-Details</title>
+    <style>
+      .productInfo {
+        background: beige;
+        border: 1px solid beige;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .productInfo img {
+        height: 200px;
+        width: 200px;
+        /* max-width: 100%; */
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .productInfo h2 {
+        font-size: 18px;
+        margin: 10px 0;
+        color: black;
+      }
+
+      .productInfo p {
+        font-size: 16px;
+        color: brown;
+      }
+
+      .productInfo button {
+        margin: 10px;
+        font-size: 20px;
+        color: beige;
+        background-color: brown;
+      }
+
+      /* Slideshow container */
+      .slideshow-container {
+        width: 100%;
+        position: relative;
+        margin: 10px;
+      }
+
+      /* Hide the images by default */
+      .mySlides {
+        display: none;
+      }
+
+      /* Next & previous buttons */
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: brown;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+      }
+
+      /* Position the "next button" to the right */
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+
+      .prev {
+        left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+
+      /* On hover, add a black background color with a little bit see-through */
+      .prev:hover,
+      .next:hover {
+        background-color: rgb(190, 190, 180);
+      }
+
+      /* Fading animation */
+      .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewProduct" class="productInfo"></div>
+
+    <script>
+      const queryString = window.location.search;
+      const params = new URLSearchParams(queryString);
+      const productId = params.get("id");
+
+      let productContainer = document.getElementById("viewProduct");
+
+      if (!productId) {
+        productContainer.innerHTML = "<p>Please select a valid product.</p>";
+        throw new Error("Product ID parameter is missing or invalid.");
+      }
+
+      productContainer.innerHTML = "<p>Loading product details...</p>";
+
+      fetch(`https://dummyjson.com/products/${productId}`)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(
+              "Failed to fetch product details. Please check the product ID."
+            );
+          }
+          return res.json();
+        })
+        .then((product) => {
+          // Display the product details
+          console.log(product);
+          productContainer.innerHTML = `
+        <h2>${product.title}</h2>`;
+
+          product.images.length >= 1
+            ? (productContainer.innerHTML += `
+                <div class="slideshow-container" id='slideshow-container'>
+                  <a class="prev" onclick="plusSlides(-1)">
+                    &#10094;
+                  </a>
+                  <a class="next" onclick="plusSlides(1)">
+                    &#10095;
+                  </a>
+                </div>`)
+            : (productContainer.innerHTML += `<img src=${product.images[0]} />`);
+
+          product.images.forEach((element) => {
+            document.getElementById('slideshow-container').innerHTML += `<div class="mySlides fade">
+              <img src="${element}" />
+            </div>`;
+          });
+
+          productContainer.innerHTML += `
+            <p><strong>Price:</strong> $${product.price}</p>
+            <p><strong>Description:</strong> ${product.description}</p>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+            <button onclick="addToWishlist(${product.id})">Add to Wishlist</button>
+        `;
+          showSlides();
+        })
+        .catch((error) => {
+          productContainer.innerHTML = `<p>Error loading product details: ${error.message}</p>`;
+        });
+
+      function addToCart(productId) {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        if (cart.includes(productId)) {
+            alert("This item is already in your cart!");
+            return;
+            }
+        cart.push(productId);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`Product ${productId} added to cart!`);
+      }
+
+      function addToWishlist(productId) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+        if (wishlist.includes(productId)) {
+            alert("This item is already in your wishlist!");
+            return;
+            }
+        wishlist.push(productId);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert(`Product ${productId} added to wishlist!`);
+      }
+
+      let slideIndex = 1;
+    //   showSlides(slideIndex);
+
+      // Next/previous controls
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      // Thumbnail image controls
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+      }
+    </script>
+  </body>
+</html>
