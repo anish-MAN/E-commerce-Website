@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a id="buyNowContainer" href="buynow.html"></a>
     <title>My Cart</title>
     <style>
         /* Reset and basic styling */
@@ -134,6 +135,36 @@
     background-color: brown;
 }
 
+#total-price {
+        font-size: 24px;
+        font-weight: bold;
+        color: brown;
+        margin: 20px;
+        text-align: center;
+    }
+
+#total-price:hover {
+        color: darkred;
+    }
+
+#buyNowContainer {
+    display: none;
+}
+
+#buyNowBtn {
+        font-size: 20px;
+        font-weight: bold;
+        color: beige;
+        background-color: brown;
+        margin: 20px 10px;
+        margin-left: 90%;
+        padding: 10px;
+    }
+
+#buyNowBtn:hover {
+        background-color: rgb(175, 25, 25);
+    }    
+
     </style>
 </head>
 <body>
@@ -166,6 +197,7 @@
     <div id="cart">
         <ul id="cart-items"></ul>
         <p id="total-price">Total: $0</p>
+        <a id="buyNowBtn" href="buynow.html">Buy Now</a>
     </div>
 
     <script>
