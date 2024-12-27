@@ -18,7 +18,6 @@
       .productInfo img {
         height: 200px;
         width: 200px;
-        /* max-width: 100%; */
         border-radius: 8px;
         margin-bottom: 10px;
       }
@@ -39,6 +38,15 @@
         font-size: 20px;
         color: beige;
         background-color: brown;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .productInfo button:hover {
+        background-color: darkbrown;
       }
 
       /* Slideshow container */
@@ -69,7 +77,6 @@
         border-radius: 0 3px 3px 0;
       }
 
-      /* Position the "next button" to the right */
       .next {
         right: 0;
         border-radius: 3px 0 0 3px;
@@ -80,7 +87,6 @@
         border-radius: 3px 0 0 3px;
       }
 
-      /* On hover, add a black background color with a little bit see-through */
       .prev:hover,
       .next:hover {
         background-color: rgb(190, 190, 180);
@@ -100,7 +106,6 @@
           opacity: 1;
         }
       }
-
     </style>
   </head>
   <body>
@@ -133,67 +138,71 @@
           // Display the product details
           console.log(product);
           productContainer.innerHTML = `
-        <h2>${product.title}</h2>`;
-
-          product.images.length >= 1
-            ? (productContainer.innerHTML += `
-                <div class="slideshow-container" id='slideshow-container'>
-                  <a class="prev" onclick="plusSlides(-1)">
-                    &#10094;
-                  </a>
-                  <a class="next" onclick="plusSlides(1)">
-                    &#10095;
-                  </a>
-                </div>`)
-            : (productContainer.innerHTML += `<img src=${product.images[0]} />`);
-
-          product.images.forEach((element) => {
-            document.getElementById('slideshow-container').innerHTML += `<div class="mySlides fade">
-              <img src="${element}" />
+            <h2>${product.title}</h2>
+            <div class="slideshow-container" id="slideshow-container">
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>`;
-          });
+
+          if (product.images.length > 0) {
+            product.images.forEach((image) => {
+              document.getElementById('slideshow-container').innerHTML += `
+                <div class="mySlides fade">
+                  <img src="${image}" />
+                </div>`;
+            });
+          } else {
+            productContainer.innerHTML += `<img src="${product.images[0]}" />`;
+          }
 
           productContainer.innerHTML += `
             <p><strong>Price:</strong> $${product.price}</p>
             <p><strong>Description:</strong> ${product.description}</p>
             <p><strong>Delivery Expected:</strong> ${product.shippingInformation}</p>
-            <p><strong>Avalability:</strong> ${product.availabilityStatus}</p>
+            <p><strong>Availability:</strong> ${product.availabilityStatus}</p>
             <p><strong>Warranty:</strong> ${product.warrantyInformation}</p>
-            <p><strong>Product Specifications:</strong> ${product.dimensions}</p>
             <p><strong>Product Rating:</strong> ${product.rating}</p>
             <p><strong>Return Policy:</strong> ${product.returnPolicy}</p>
-            <button>Buy Now</button></a>
-        `;
+            <p><strong>Product Reviews:</strong></p>`;
+
+          // Render product reviews
+          if (product.reviews && product.reviews.length > 0) {
+            product.reviews.forEach((review) => {
+              document.getElementById('viewProduct').innerHTML += `
+                <div>
+                  <p>${review}</p>
+                </div>`;
+            });
+          } else {
+            document.getElementById('viewProduct').innerHTML += `
+              <p>No reviews yet.</p>`;
+          }
+
+          // Add Buy Now button
+          productContainer.innerHTML += `<button>Buy Now</button>`;
+
+          // Initialize the slideshow
           showSlides();
         })
         .catch((error) => {
           productContainer.innerHTML = `<p>Error loading product details: ${error.message}</p>`;
         });
 
-
       let slideIndex = 1;
-    //   showSlides(slideIndex);
 
-      // Next/previous controls
       function plusSlides(n) {
         showSlides((slideIndex += n));
       }
 
-      // Thumbnail image controls
       function currentSlide(n) {
         showSlides((slideIndex = n));
       }
 
-      function showSlides(n) {
-        let i;
+      function showSlides() {
         let slides = document.getElementsByClassName("mySlides");
-        if (n > slides.length) {
-          slideIndex = 1;
-        }
-        if (n < 1) {
-          slideIndex = slides.length;
-        }
-        for (i = 0; i < slides.length; i++) {
+        if (slideIndex > slides.length) slideIndex = 1;
+        if (slideIndex < 1) slideIndex = slides.length;
+        for (let i = 0; i < slides.length; i++) {
           slides[i].style.display = "none";
         }
         slides[slideIndex - 1].style.display = "block";
