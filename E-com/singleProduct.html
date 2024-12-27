@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <a id="buyNowContainer" href="buynow.html"></a>
     <title>Product-Details</title>
     <style>
       .productInfo {
@@ -100,6 +101,11 @@
           opacity: 1;
         }
       }
+
+      #buyNowContainer{
+        display: none;
+      }
+
     </style>
   </head>
   <body>
@@ -157,6 +163,7 @@
             <p><strong>Description:</strong> ${product.description}</p>
             <button onclick="addToCart(${product.id})">Add to Cart</button>
             <button onclick="addToWishlist(${product.id})">Add to Wishlist</button>
+            <a href="buynow.html?id=${product.id}"><button>Buy Now</button></a>
         `;
           showSlides();
         })
@@ -185,6 +192,8 @@
         localStorage.setItem("wishlist", JSON.stringify(wishlist));
         alert(`Product ${productId} added to wishlist!`);
       }
+
+      // function buyNow(productId) {}
 
       let slideIndex = 1;
     //   showSlides(slideIndex);
