@@ -175,7 +175,7 @@
           }
 
           // Add Buy Now button
-          productHTML += `<div id="paymentGateway"><a href="paymentGateway.html">Buy Now</a></div>`;
+          productHTML += `<div id="paymentGateway"><a href="paymentGateway.html?id=${product.id}">Buy Now</a></div>`;
 
           productContainer.innerHTML = productHTML;
 

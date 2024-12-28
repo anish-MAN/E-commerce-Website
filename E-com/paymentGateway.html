@@ -6,6 +6,96 @@
     <title>Payment-Gateway</title>
 </head>
 <body>
-    <h1>Make Your Payment...</h1>
+    <div class="userInfo">
+        <form action="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name">
+            <label for="contact-no">Contact-No.</label>
+            <input type="number" name="contact-no" id="contact-no">
+            <label for="address">Address:</label>
+            <input type="text" name="address" id="address">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="viewProduct" class="productInfo"></div>
+
+    <script>
+      const queryString = window.location.search;
+      const params = new URLSearchParams(queryString);
+      const productId = params.get("id");
+
+      let productContainer = document.getElementById("viewProduct");
+
+      if (!productId) {
+        productContainer.innerHTML = "<p>Please select a valid product.</p>";
+        throw new Error("Product ID parameter is missing or invalid.");
+      }
+
+      productContainer.innerHTML = "<p>Loading product details...</p>";
+
+      fetch(`https://dummyjson.com/products/${productId}`)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(
+              "Failed to fetch product details. Please check the product ID."
+            );
+          }
+          return res.json();
+        })
+        .then((product) => {
+          // Display the product details
+          console.log(product);
+          productContainer.innerHTML = `
+            <h2>${product.title}</h2>
+            <div class="slideshow-container" id="slideshow-container">
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <p><strong>Price:</strong> $${product.price}</p>
+            <p><strong>Delivery Expected:</strong> ${product.shippingInformation}</p>
+            <p><strong>Return Policy:</strong> ${product.returnPolicy}</p>`
+
+          // Add images for the slideshow
+          if (product.images.length > 0) {
+            let slideshowContainer = document.getElementById("slideshow-container");
+            product.images.forEach((image) => {
+              slideshowContainer.innerHTML += `
+                <div class="mySlides fade">
+                  <img src="${image}" />
+                </div>`;
+            });
+          } else {
+            productContainer.innerHTML += `<img src="${product.images[0]}" />`;
+          }
+
+          // Initialize the slideshow
+          showSlides();
+        })
+        .catch((error) => {
+          productContainer.innerHTML = `<p>Error loading product details: ${error.message}</p>`;
+        });
+
+      let slideIndex = 1;
+
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides() {
+        let slides = document.getElementsByClassName("mySlides");
+        if (slideIndex > slides.length) slideIndex = 1;
+        if (slideIndex < 1) slideIndex = slides.length;
+        for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+      }
+    </script>
 </body>
 </html>
