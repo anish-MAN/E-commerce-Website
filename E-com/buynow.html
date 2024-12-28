@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payment-Gateway</title>
+    <title>Product Description</title>
     <style>
       .productInfo {
         background: beige;
@@ -33,19 +33,28 @@
         color: brown;
       }
 
-      .productInfo button {
-        margin: 10px;
-        font-size: 20px;
+      .productInfo span {
+        font-size: 16px;
+        color: brown;
+        margin: 5px;
+      }
+
+      #paymentGateway {
+        margin: 20px 5px 0 0;
+      }
+
+      #paymentGateway a{
         color: beige;
         background-color: brown;
         padding: 10px 20px;
-        border: none;
+        border: 2px solid;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s;
+        text-decoration: none;
       }
 
-      .productInfo button:hover {
+      #paymentGateway a:hover {
         background-color: darkbrown;
       }
 
@@ -137,25 +146,12 @@
         .then((product) => {
           // Display the product details
           console.log(product);
-          productContainer.innerHTML = `
+          let productHTML = `
             <h2>${product.title}</h2>
             <div class="slideshow-container" id="slideshow-container">
               <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
               <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>`;
-
-          if (product.images.length > 0) {
-            product.images.forEach((image) => {
-              document.getElementById('slideshow-container').innerHTML += `
-                <div class="mySlides fade">
-                  <img src="${image}" />
-                </div>`;
-            });
-          } else {
-            productContainer.innerHTML += `<img src="${product.images[0]}" />`;
-          }
-
-          productContainer.innerHTML += `
+            </div>
             <p><strong>Price:</strong> $${product.price}</p>
             <p><strong>Description:</strong> ${product.description}</p>
             <p><strong>Delivery Expected:</strong> ${product.shippingInformation}</p>
@@ -168,18 +164,33 @@
           // Render product reviews
           if (product.reviews && product.reviews.length > 0) {
             product.reviews.forEach((review) => {
-              document.getElementById('viewProduct').innerHTML += `
+              productHTML += `
                 <div>
-                  <p>${review}</p>
+                  <span><strong>Comment:</strong>${review.comment}</span>
+                  <span><strong>Rating:</strong>${review.rating}</span>
                 </div>`;
             });
           } else {
-            document.getElementById('viewProduct').innerHTML += `
-              <p>No reviews yet.</p>`;
+            productHTML += `<p>No reviews yet.</p>`;
           }
 
           // Add Buy Now button
-          productContainer.innerHTML += `<button>Buy Now</button>`;
+          productHTML += `<div id="paymentGateway"><a href="paymentGateway.html">Buy Now</a></div>`;
+
+          productContainer.innerHTML = productHTML;
+
+          // Add images for the slideshow
+          if (product.images.length > 0) {
+            let slideshowContainer = document.getElementById("slideshow-container");
+            product.images.forEach((image) => {
+              slideshowContainer.innerHTML += `
+                <div class="mySlides fade">
+                  <img src="${image}" />
+                </div>`;
+            });
+          } else {
+            productContainer.innerHTML += `<img src="${product.images[0]}" />`;
+          }
 
           // Initialize the slideshow
           showSlides();
