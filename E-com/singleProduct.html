@@ -6,6 +6,86 @@
     <a id="buyNowContainer" href="buynow.html"></a>
     <title>Product-Details</title>
     <style>
+
+*{
+            padding: 0;margin:0;
+        }
+        body{
+            background-color: beige;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background: brown;
+            box-shadow: 15px;
+        }
+        h2{
+            text-align: center;
+            margin: 10px;
+            color: brown;
+        }
+        li{
+            list-style: none;
+        }
+        #brandLogo{
+            height: 100%;
+            width: 50px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        a{
+            display: inline-block;
+            padding: 10px;
+            color: beige;
+            text-decoration: none;
+        }
+        .dropdown{
+            position: relative;
+        }
+        .dropdown-content{
+            display: none;
+            position: absolute;
+            padding: 10px;
+            top: 20px;
+            z-index: 2;
+        }
+        .dropdown-content a{
+            width: 100px;
+        }
+        .dropdown:hover .dropdown-content{
+            display: block;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form input{
+            background: beige;
+            color: brown;
+            font-size: larger;
+        }
+        form button{
+            border-radius: 5px;
+        }
+        #search{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+        }
+        .searchbtn{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+            margin: 0 10px;
+        }
+
+
       .productInfo {
         background: beige;
         border: 1px solid beige;
@@ -109,6 +189,32 @@
     </style>
   </head>
   <body>
+
+    <nav>
+      <li><img id="brandLogo" src="SmallSquareLogoJpg.jpg" alt="Brand-Logo"></li>
+      <li><a href="e-com.html">HOME</a></li>
+      <li><a href="aboutus.html">ABOUT-US</a></li>
+          <li class="dropdown">
+              <a href="contactus.html">CONTACT-US</a>
+          </li>
+          <li class="dropdown">
+          <a href="#">OUR-PRODUCTS</a>
+          <div class="dropdown-content">
+              <a href="category.html?category=smartphones">Smartphones</a>
+              <a href="category.html?category=groceries">Groceries</a>
+              <a href="category.html?category=skin-care">Skincare</a>
+          </div>
+          </li>
+          <li><a href="cart.html">MY CART</a></li>
+          <li><a href="wishlist.html">WISHLIST</a></li>
+
+          <form action="search.html">
+              <input type="text" name="query" placeholder="search here">
+              <button class="searchbtn" type="submit">Search</button>
+          </form>
+  </nav>
+
+
     <div id="viewProduct" class="productInfo"></div>
 
     <script>
@@ -163,7 +269,7 @@
             <p><strong>Description:</strong> ${product.description}</p>
             <button onclick="addToCart(${product.id})">Add to Cart</button>
             <button onclick="addToWishlist(${product.id})">Add to Wishlist</button>
-            <a href="buynow.html?id=${product.id}"><button>Buy Now</button></a>
+            <a href="buynow.html?id=${product.id}"><button id="buynowbtn">Buy Now</button></a>
         `;
           showSlides();
         })

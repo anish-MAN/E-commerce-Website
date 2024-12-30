@@ -4,9 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment-Gateway</title>
+    <style>
+      .userInfo{
+
+      }
+
+      .productInfo {
+        background: beige;
+        border: 1px solid beige;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin: 10px;
+      }
+
+      .productInfo img {
+        height: 200px;
+        width: 200px;
+        /* max-width: 100%; */
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .productInfo h2 {
+        font-size: 18px;
+        margin: 10px 0;
+        color: black;
+      }
+
+      .productInfo p {
+        font-size: 16px;
+        color: brown;
+      }
+
+      .productInfo button {
+        margin: 10px;
+        font-size: 20px;
+        color: beige;
+        background-color: brown;
+      }
+
+      /* Slideshow container */
+      .slideshow-container {
+        width: 100%;
+        position: relative;
+        margin: 10px;
+      }
+
+      /* Hide the images by default */
+      .mySlides {
+        display: none;
+      }
+
+      /* Next & previous buttons */
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: brown;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+      }
+
+      /* Position the "next button" to the right */
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+
+      .prev {
+        left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+
+      /* On hover, add a black background color with a little bit see-through */
+      .prev:hover,
+      .next:hover {
+        background-color: rgb(190, 190, 180);
+      }
+
+      /* Fading animation */
+      .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
 </head>
 <body>
     <div class="userInfo">
+      <h2>Detail's For Delivery</h2> <br>
         <form action="post">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name">
