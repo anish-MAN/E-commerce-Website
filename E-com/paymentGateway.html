@@ -310,12 +310,15 @@
 
   <div class="userInfo">
     <h2>Details for Delivery</h2>
-    <form action="post">
+    <form id="userDetails" onsubmit="submitData(event)" method="post" >
+      <input type="hidden" id="product-id" name="productid" >
+      <input type="hidden" id="product-title" name="producttitle" >
+      <input type="hidden" id="product-price" name="productprice" >
       <label for="name">Name:</label>
       <input type="text" name="name" id="name" required>
       
-      <label for="contact-no">Contact No.:</label>
-      <input type="number" name="contact-no" id="contact-no" required>
+      <label for="contact">Contact No.:</label>
+      <input type="number" name="contact" id="contact" required>
       
       <label for="address">Address:</label>
       <input type="text" name="address" id="address" required>
@@ -366,6 +369,11 @@
             <p><strong>Delivery Expected:</strong> ${product.shippingInformation}</p>
             <p><strong>Return Policy:</strong> ${product.returnPolicy}</p>`
 
+            // Sending product details to the sheetdb
+            document.getElementById('product-id').value=product.id;
+            document.getElementById('product-title').value=product.title;
+            document.getElementById('product-price').value=product.price;
+
           // Add images for the slideshow
           if (product.images.length > 0) {
               let slideshowContainer = document.getElementById("slideshow-container");
@@ -405,6 +413,36 @@
           slides[i].style.display = "none";
         }
         slides[slideIndex - 1].style.display = "block";
+      }
+
+      function submitData(event) {
+        event.preventDefault();
+
+        let user = document.querySelector('#userDetails')
+
+        fetch('https://sheetdb.io/api/v1/htx1vitqx1pez', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        data: [
+            {
+                'id': "INCREMENT",
+                'name': user.name.value,
+                'contact':  user.contact.value,
+                'address': user.address.value,
+                'product-id': user.productid.value,
+                'product-name': user.producttitle.value,
+                'product-price': user.productprice.value
+            }
+        ]
+    })
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+
       }
     </script>
 </body>
