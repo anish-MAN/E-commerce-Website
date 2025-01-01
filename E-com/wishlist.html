@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a id="singleproduct-html" href="singleProduct.html"></a>
     <title>My Wishlist</title>
 <style>
         *{
@@ -130,6 +131,11 @@
     color: beige;
     background-color: brown;
 }
+
+#singleproduct-html{
+    display: none;
+}
+
 </style>
 
 </head>
@@ -188,8 +194,9 @@
             wishlistItems.forEach(item => {
 
                 const wishlistItem = document.createElement('li');
-                wishlistItem.innerHTML = `
-                <img src="${item.thumbnail}" alt="${item.title}">
+                wishlistItem.innerHTML = `<a href="singleProduct.html?id=${item.id}">
+                    <img src="${item.thumbnail}" alt="${item.title}">
+                    </a>
                 <p>${item.title}</p> - $${item.price}<br>
                 <button onclick="removeFromWishlist(${item.id})">Remove</button>
                 `;

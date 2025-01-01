@@ -41,8 +41,8 @@
         }
         a{
             display: inline-block;
-            padding: 10px;
-            background: brown;
+            /* padding: 10px; */
+            /* background: brown; */
             color: beige;
             text-decoration: none;
         }
@@ -62,6 +62,7 @@
         .dropdown:hover .dropdown-content{
             display: block;
         }
+
         form{
             display: flex;
             align-items: center;
@@ -126,13 +127,25 @@
 #cart-items p {
     font-size: 16px;
     color: beige;
+    margin: 5px;
 }
 
 #cart-items button {
     margin: 10px;
+    padding: 10px;
     font-size: 20px;
     color: beige;
     background-color: brown;
+    border: 2px solid;
+}
+
+#cart-items a {
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+    color: beige;
+    background-color: brown;
+    border: 2px solid;
 }
 
 #total-price {
@@ -147,23 +160,9 @@
         color: darkred;
     }
 
-#buyNowContainer {
+ #buyNowContainer {
     display: none;
 }
-
-#buyNowBtn {
-        font-size: 20px;
-        font-weight: bold;
-        color: beige;
-        background-color: brown;
-        margin: 20px 10px;
-        margin-left: 90%;
-        padding: 10px;
-    }
-
-#buyNowBtn:hover {
-        background-color: rgb(175, 25, 25);
-    }    
 
     </style>
 </head>
@@ -197,7 +196,6 @@
     <div id="cart">
         <ul id="cart-items"></ul>
         <p id="total-price">Total: $0</p>
-        <a id="buyNowBtn" href="buynow.html?id="${product.id}>Buy Now</a>
     </div>
 
     <script>
@@ -235,6 +233,8 @@
                     <h3>${item.title}</h3>
                     <p>Price: $${item.price}</p>
                     <button onclick="removeFromCart(${item.id})">Remove</button>
+                    <a id="buyNowBtn" href="buynow.html?id=${item.id}">Buy Now</a>
+
                 `;
 
                 cartItemsContainer.appendChild(cartItem);

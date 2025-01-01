@@ -5,6 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Description</title>
     <style>
+
+        *{
+            padding: 0;margin:0;
+        }
+        body{
+            background-color: beige;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background: brown;
+            box-shadow: 15px;
+        }
+        h2{
+            text-align: center;
+            margin: 10px;
+            color: brown;
+        }
+        li{
+            list-style: none;
+        }
+        #brandLogo{
+            height: 100%;
+            width: 50px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        a{
+            display: inline-block;
+            /* padding: 10px; */
+            /* background: brown; */
+            color: beige;
+            text-decoration: none;
+        }
+        .dropdown{
+            position: relative;
+        }
+        .dropdown-content{
+            display: none;
+            position: absolute;
+            padding: 10px;
+            top: 20px;
+            z-index: 2;
+        }
+        .dropdown-content a{
+            width: 100px;
+            background-color: brown;
+            padding: 10px;
+        }
+        .dropdown:hover .dropdown-content{
+            display: block;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form input{
+            background: beige;
+            color: brown;
+            font-size: larger;
+        }
+        form button{
+            border-radius: 5px;
+        }
+        #search{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+        }
+        .searchbtn{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+            margin: 0 10px;
+        }
+
       .productInfo {
         background: beige;
         border: 1px solid beige;
@@ -31,12 +113,13 @@
       .productInfo p {
         font-size: 16px;
         color: brown;
+        margin: 10px;
       }
 
-      .productInfo span {
+      #reviewsId {
         font-size: 16px;
         color: brown;
-        margin: 5px;
+        margin: 10px;
       }
 
       #paymentGateway {
@@ -118,6 +201,31 @@
     </style>
   </head>
   <body>
+
+    <nav>
+      <li><img id="brandLogo" src="SmallSquareLogoJpg.jpg" alt="Brand-Logo"></li>
+      <li><a href="e-com.html">HOME</a></li>
+      <li><a href="aboutus.html">ABOUT-US</a></li>
+          <li class="dropdown">
+              <a href="contactus.html">CONTACT-US</a>
+          </li>
+          <li class="dropdown">
+          <a href="#">OUR-PRODUCTS</a>
+          <div class="dropdown-content">
+              <a href="category.html?category=smartphones">Smartphones</a>
+              <a href="category.html?category=groceries">Groceries</a>
+              <a href="category.html?category=skin-care">Skincare</a>
+          </div>
+          </li>
+          <li><a href="cart.html">MY CART</a></li>
+          <li><a href="wishlist.html">WISHLIST</a></li>
+
+          <form action="search.html">
+              <input type="text" name="query" placeholder="search here">
+              <button class="searchbtn" type="submit">Search</button>
+          </form>
+  </nav>
+
     <div id="viewProduct" class="productInfo"></div>
 
     <script>
@@ -165,7 +273,7 @@
           if (product.reviews && product.reviews.length > 0) {
             product.reviews.forEach((review) => {
               productHTML += `
-                <div>
+                <div id="reviewsId">
                   <span><strong>Comment:</strong>${review.comment}</span>
                   <span><strong>Rating:</strong>${review.rating}</span>
                 </div>`;

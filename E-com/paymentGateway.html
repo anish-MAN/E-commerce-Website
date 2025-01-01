@@ -5,16 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment-Gateway</title>
     <style>
-      .userInfo{
 
-      }
+        *{
+            padding: 0;margin:0;
+        }
+
+        body{
+            background-color: white;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background: brown;
+            box-shadow: 15px;
+        }
+        h2{
+            text-align: center;
+            margin: 10px;
+            color: brown;
+        }
+        li{
+            list-style: none;
+        }
+        #brandLogo{
+            height: 100%;
+            width: 50px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        a{
+            display: inline-block;
+            /* padding: 10px; */
+            /* background: brown; */
+            color: beige;
+            text-decoration: none;
+        }
+        .dropdown{
+            position: relative;
+        }
+        .dropdown-content{
+            display: none;
+            position: absolute;
+            padding: 10px;
+            top: 20px;
+            z-index: 2;
+        }
+        .dropdown-content a{
+            width: 100px;
+            background-color: brown;
+            padding: 10px;
+        }
+        .dropdown:hover .dropdown-content{
+            display: block;
+        }
+
+        form{
+          height: 75%;
+        }
+        form input{
+            background: beige;
+            color: brown;
+            font-size: larger;
+        }
+        form button{
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        #search{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+        }
+        .searchbtn{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+            margin: 0 10px;
+        }
+
+        .mainContainer{
+          /* background-color: red; */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 20px;
+        }
+
+        .userInfo {
+            background: beige;
+            padding: 0px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            height: 75%;
+            text-align: center;
+        }
+
+        .userInfo h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .userInfo label {
+            font-size: 16px;
+            color: brown;
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .userInfo input[type="text"],
+        .userInfo input[type="number"] {
+            width: 90%;
+            padding: 12px;
+            margin: 8px 0 20px;
+            border: 1px solid brown;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: white;
+            transition: border 0.3s ease;
+        }
+
+        .userInfo input[type="text"]:focus,
+        .userInfo input[type="number"]:focus {
+            border-color: brown;
+            outline: none;
+        }
+
+        .userInfo button {
+            padding: 12px 20px;
+            background-color: brown;
+            color: beige;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .userInfo button:hover {
+            background-color: rgb(180, 30, 30);
+        }
+
+        .userInfo button:active {
+            background-color: beige;
+        }
+
+        .userInfo input[type="text"], 
+        .userInfo input[type="number"] {
+            font-size: 16px;
+        }
+
 
       .productInfo {
         background: beige;
         border: 1px solid beige;
+        width: 50%;
+        height: 75%;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 16px;
+        padding: 25px;
         text-align: center;
         transition: transform 0.3s, box-shadow 0.3s;
         margin: 10px;
@@ -23,7 +182,6 @@
       .productInfo img {
         height: 200px;
         width: 200px;
-        /* max-width: 100%; */
         border-radius: 8px;
         margin-bottom: 10px;
       }
@@ -36,6 +194,7 @@
 
       .productInfo p {
         font-size: 16px;
+        margin: 10px;
         color: brown;
       }
 
@@ -44,6 +203,20 @@
         font-size: 20px;
         color: beige;
         background-color: brown;
+      }
+
+      #payBtn{
+        margin: 10px;
+        padding: 10px;
+        font-size: 20px;
+        color: beige;
+        background-color: brown;
+        border-radius: 10px;
+        margin-left: 90%;
+      }
+
+      #payBtn:hover{
+        background-color: rgb(211, 25, 25);
       }
 
       /* Slideshow container */
@@ -108,21 +281,54 @@
     </style>
 </head>
 <body>
-    <div class="userInfo">
-      <h2>Detail's For Delivery</h2> <br>
-        <form action="post">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name">
-            <label for="contact-no">Contact-No.</label>
-            <input type="number" name="contact-no" id="contact-no">
-            <label for="address">Address:</label>
-            <input type="text" name="address" id="address">
 
-            <button type="submit">Submit</button>
+  <nav>
+    <li><img id="brandLogo" src="SmallSquareLogoJpg.jpg" alt="Brand-Logo"></li>
+    <li><a href="e-com.html">HOME</a></li>
+    <li><a href="aboutus.html">ABOUT-US</a></li>
+        <li class="dropdown">
+            <a href="contactus.html">CONTACT-US</a>
+        </li>
+        <li class="dropdown">
+        <a href="#">OUR-PRODUCTS</a>
+        <div class="dropdown-content">
+            <a href="category.html?category=smartphones">Smartphones</a>
+            <a href="category.html?category=groceries">Groceries</a>
+            <a href="category.html?category=skin-care">Skincare</a>
+        </div>
+        </li>
+        <li><a href="cart.html">MY CART</a></li>
+        <li><a href="wishlist.html">WISHLIST</a></li>
+
+        <form action="search.html">
+            <input type="text" name="query" placeholder="search here">
+            <button class="searchbtn" type="submit">Search</button>
         </form>
-    </div>
+</nav>
 
-    <div id="viewProduct" class="productInfo"></div>
+<div class="mainContainer">
+
+  <div class="userInfo">
+    <h2>Details for Delivery</h2>
+    <form action="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+      
+      <label for="contact-no">Contact No.:</label>
+      <input type="number" name="contact-no" id="contact-no" required>
+      
+      <label for="address">Address:</label>
+      <input type="text" name="address" id="address" required>
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
+  <div id="viewProduct" class="productInfo"></div>
+  
+</div>
+
+<button id="payBtn">Pay</button>
 
     <script>
       const queryString = window.location.search;
@@ -162,16 +368,17 @@
 
           // Add images for the slideshow
           if (product.images.length > 0) {
-            let slideshowContainer = document.getElementById("slideshow-container");
-            product.images.forEach((image) => {
-              slideshowContainer.innerHTML += `
-                <div class="mySlides fade">
-                  <img src="${image}" />
-                </div>`;
+              let slideshowContainer = document.getElementById("slideshow-container");
+                product.images.forEach((image) => {
+                  slideshowContainer.innerHTML += `
+                    <div class="mySlides fade">
+                      <img src="${image}" />
+                    </div>`;
             });
           } else {
-            productContainer.innerHTML += `<img src="${product.images[0]}" />`;
-          }
+            productContainer.innerHTML += `<p>No product images available.</p>`;
+            }
+
 
           // Initialize the slideshow
           showSlides();
