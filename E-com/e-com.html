@@ -13,235 +13,606 @@
     <title>www.1Shop.com</title> 
     
     <style>
-        *{
-            padding: 0;margin:0;
-        }
-        body{
-            background-color: beige;
-        }
-        nav{
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            background: brown;
-            box-shadow: 15px;
-        }
-        li{
-            list-style: none;
-        }
-        #brandLogo{
-            height: 100%;
-            width: 50px;
-            margin: 5px;
-            border-radius: 10px;
-        }
-        a{
-            display: inline-block;
-            padding: 10px;
-            background: brown;
-            color: beige;
-            text-decoration: none;
-        }
-        .dropdown{
-            position: relative;
-        }
-        .dropdown-content{
-            display: none;
-            position: absolute;
-            padding: 10px;
-            top: 20px;
-            z-index: 2;
-        }
-        .dropdown-content a{
-            width: 100px;
-        }
-        .dropdown:hover .dropdown-content{
-            display: block;
-        }
-        form{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        form input{
-            background: beige;
-            color: brown;
-            font-size: larger;
-        }
-        form button{
-            border-radius: 5px;
-        }
-        #search{
-            background-color: beige;
-            color: brown;
-            font-size: large;
-        }
-        .searchbtn{
-            background-color: beige;
-            color: brown;
-            font-size: large;
-            margin: 0 10px;
-        }
-        /* Slideshow container */
+        /* Global styles */
+* {
+    padding: 0;
+    margin: 0;
+    /* outline: 2px solid greenyellow; */
+}
+
+body {
+    background-color: beige;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: brown;
+    box-shadow: 15px;
+}
+
+/* #hamburger-menu {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: beige;
+} */
+
+li {
+    list-style: none;
+}
+
+#brandLogo {
+    height: 100%;
+    width: 50px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+a {
+    display: inline-block;
+    padding: 10px;
+    background: brown;
+    color: beige;
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    top: 20px;
+    z-index: 2;
+}
+
+.dropdown-content a {
+    width: 100px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form input {
+    background: beige;
+    color: brown;
+    font-size: larger;
+}
+
+form button {
+    border-radius: 5px;
+}
+
+#search {
+    background-color: beige;
+    color: brown;
+    font-size: large;
+}
+
+.searchbtn {
+    background-color: beige;
+    color: brown;
+    font-size: large;
+    margin: 0 10px;
+}
+
+/* Slideshow container */
 .slideshow-container {
-  width: 100%;
-  position: relative;
-  margin: 10px;
+    width: 100%;
+    position: relative;
+    margin: 10px;
 }
 
-/* Hide the images by default */
 .mySlides {
-  display: none;
+    display: none;
 }
 
-/* Next & previous buttons */
 .prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
-/* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Number text (1/3 etc) */
 .numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
 }
 
-/* Fading animation */
 .fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
 @keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-        .container2{
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: center;
-            background-color: beige;
-        }
-        .container2 img{
-            margin-top: 20px;
-            height: 200px;
-            width: 250px;
-        }
-        .container2 .card {
-            margin: 10px 10px;
-            height: 250px;
-        }
-        .container2 .card a{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 10px;
-            background: brown;
-            color: beige;
-            text-decoration: none;
-        }
-        #products {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 2%;
-        }
-        #products .product-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-            overflow: hidden;
-        }
-        #products .product-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-        }
-        #products .product-card h3 {
-            margin: 10px 0;
-        }
-        #products .product-card p {
-            color: #555;
-        }
-        #products .product-card button {
-            margin: 10px 0;
-            padding: 10px 20px;
-            background-color: brown;
-            color: beige;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #products .product-card button:hover {
-            background-color: rgb(128, 10, 10);
-        }
-        .container3{
-            margin-top: 5px;
-            background-color: brown;
-            color: beige;
-        }
-        .container3 .socialLinks {
-            display: flex;
-            flex-wrap: nowrap;
-            /* margin: 10px; */
-            justify-content: center;
-        }
+/* sidenavbar */
+.sidebar {
+  /* height: 100%; */
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  /* top: 0; */
+  left: 0;
+  background-color: beige;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
 
-        .container3 .socialLinks i{
-            margin: 10px 10px;
-        }
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
 
-        footer{
-            text-align: center;
-        }
-        #category-html{
-            display: none;
-        }
-        #search-html{
-            display: none;
-        }
-        #singleproduct-html{
-            display: none;
-        }
-        #cart-html{
-            display: none;
-        }
-        #wishlist-html{
-            display: none;
-        }
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  /* right: 25px; */
+  font-size: 37px;
+  /* margin-left: 50px; */
+}
+
+.openbtn {
+  font-size: 25px;
+  cursor: pointer;
+  background-color: brown;
+  color: white;
+  /* padding: 10px 15px; */
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#smallnav {
+  transition: margin-left .1s;
+  /* padding: 16px; */
+}
+
+@media screen and (min-height: 320px) {
+    .sidebar a {
+        color: beige;
+    }
+}
+
+.container2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: beige;
+}
+
+.container2 .card {
+    margin: 10px;
+    width: 250px;
+    height: 250px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container2 img {
+    height: 200px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.container2 .card a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: brown;
+    color: beige;
+    text-decoration: none;
+    padding: 10px;
+}
+
+#products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#products .product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#products .product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+#products .product-card h3 {
+    margin: 10px 0;
+}
+
+#products .product-card p {
+    color: #555;
+}
+
+#products .product-card button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: brown;
+    color: beige;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#products .product-card button:hover {
+    background-color: rgb(128, 10, 10);
+}
+
+.container3 {
+    margin-top: 5px;
+    background-color: brown;
+    color: beige;
+}
+
+.container3 .socialLinks {
+    display: flex;
+    justify-content: center;
+}
+
+.container3 .socialLinks i {
+    margin: 10px;
+}
+
+footer {
+    text-align: center;
+}
+
+#category-html, #search-html, #singleproduct-html, #cart-html, #wishlist-html {
+    display: none;
+}
+
+/* Media Queries for different screen sizes */
+
+/* Tablet */
+@media (max-width: 769px) {
+    nav {
+        /* flex-direction: column; */
+        /* align-items: flex-start; */
+        padding: 10px;
+        width: 100%;
+    }
+
+    nav a {
+        display: none;
+        padding: 5px;
+    }
+    
+    .slideshow-container {
+        width: 91%;
+    }
+
+    #brandLogo {
+        width: 55px;
+    }
+
+    .container2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+    }
+
+    .slideshow-container {
+        width: 97%;
+    }
+
+    .container2 .card {
+        width: 90%;
+        margin: 10px;
+    }
+
+    .container2 img {
+        height: 215px;
+        width: 100%;
+    }
+
+    .container2 .card a {
+        width: 100%;
+    }
+
+    form input {
+        width: 200px;
+    }
+
+    form button {
+        padding: 8px 15px;
+    }
+
+    .searchbtn {
+        margin-left: 5px;
+        padding: 5px;
+        font-size: 15px;
+    }
+
+    .container3 footer {
+        margin-top: 10px;
+    }
+
+    #products .product-card {
+        width: 90%;
+    }
+}
+
+/* Mobile (Smaller Tablets / Large Phones) */
+@media (max-width: 600px) {
+    nav {
+        padding: 10px;
+    }
+
+    #brandLogo {
+        width: 30px;
+    }
+
+    .container2 .card {
+        width: 90%;
+    }
+
+    .container2 .card img {
+        align-content: center;
+    }
+
+    .container2 .card a {
+        width: 100%;
+    }
+
+    #products .product-card {
+        width: 100%;
+    }
+
+    .container3 {
+        padding: 15px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    nav {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .searchbtn {
+        font-size: 15px;
+        padding: 5px;
+    }
+
+    #brandLogo {
+        width: 50px;
+    }
+
+    .container2 .card {
+        margin: 10px;
+    }
+
+    .slideshow-container img {
+        height: 200px;
+        width: 100%;
+    }
+
+    .slideshow-container {
+        width: 95%;
+    }
+
+    .container2 .card a {
+        width: 100%;
+    }
+
+    #products .product-card {
+        width: 100%;
+    }
+
+    .container3 {
+        padding: 15px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+}
+
+/* Mobile (Very small screens) */
+@media (max-width: 375px) {
+    body {
+        width: 100%;
+    }
+
+    nav {
+        padding: 10px;
+        width: 100%;
+    }
+
+    nav form {
+        margin-left: 20px;
+    }
+
+    #brandLogo {
+        width: 35px;
+    }
+
+    .slideshow-container {
+        width: 100%;
+    }
+
+    .container2 .card {
+        width: 90%;
+    }
+
+    .container2 .card img {
+        align-content: center;
+    }
+
+    .container2 .card a {
+        width: 100%;
+    }
+
+    #products .product-card {
+        width: 100%;
+    }
+
+    .container3 {
+        padding: 15px;
+        width: 95%;
+    }
+
+    footer {
+        padding: 15px;
+    }
+}
+
+/* Mobile (Extra small devices) */
+@media (max-width: 320px) {
+
+    nav {
+        padding: 10px;
+        width: 101%;
+    }
+
+    nav form .searchbtn{
+        font-size: 15px;
+        padding: 5px;
+    }
+
+    form input {
+        width: 150px;
+    }
+
+    #brandLogo {
+        width: 40px;
+        margin: 5px;
+        padding: 5px;
+    }
+
+    .slideshow-container {
+        width: 100%;
+    }
+
+    #smallnav {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container2 .card {
+        width: 90%;
+    }
+
+    .container2 .card img {
+        align-content: center;
+    }
+
+    .container2 .card a {
+        width: 90%;
+    }
+
+    #products .product-card {
+        width: 100%;
+    }
+
+    .container3 {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .prev , .next {
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+}
+
+/* Large Screens (Desktop and bigger devices) */
+@media (min-width: 1024px) {
+
+    nav {
+        width: 100%;
+    }
+
+    .slideshow-container {
+        width: 98%;
+    }
+
+    #smallnav {
+        display: none;
+    }
+
+    .container2 .card {
+        width: 25%;
+    }
+
+    #products .product-card {
+        width: 300px;
+    }
+}
+
     </style>
-
 </head>
 <body>
 
@@ -267,7 +638,30 @@
                 <input type="text" name="query" placeholder="search here">
                 <button class="searchbtn" type="submit">Search</button>
             </form>
+
+            <div id="smallnav">
+                <button class="openbtn" onclick="openNav()">☰</button>
+            </div>
     </nav>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <li><a href="e-com.html">HOME</a></li>
+        <li><a href="aboutus.html">ABOUT-US</a></li>
+            <li class="dropdown">
+                <a href="contactus.html">CONTACT-US</a>
+            </li>
+            <li class="dropdown">
+            <a href="#">OUR-PRODUCTS</a>
+            <div class="dropdown-content">
+                <a href="category.html?category=smartphones">Smartphones</a>
+                <a href="category.html?category=groceries">Groceries</a>
+                <a href="category.html?category=skin-care">Skincare</a>
+            </div>
+            </li>
+            <li><a href="cart.html">MY CART</a></li>
+            <li><a href="wishlist.html">WISHLIST</a></li>
+      </div>
 
     <!-- Slideshow container -->
 <div class="slideshow-container">
