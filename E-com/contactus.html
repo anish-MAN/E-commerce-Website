@@ -36,10 +36,329 @@
             margin: 10px;
             color: brown;
         }
+
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background: brown;
+            box-shadow: 15px;
+        }
+        h2{
+            text-align: center;
+            margin: 10px;
+            color: brown;
+        }
+        li{
+            list-style: none;
+        }
+        #brandLogo{
+            height: 100%;
+            width: 50px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+        a{
+            display: inline-block;
+            padding: 10px;
+            color: beige;
+            text-decoration: none;
+        }
+        .dropdown{
+            position: relative;
+        }
+        .dropdown-content{
+            display: none;
+            position: absolute;
+            padding: 10px;
+            top: 20px;
+            z-index: 2;
+        }
+        .dropdown-content a{
+            width: 100px;
+            background-color: brown;
+        }
+        .dropdown:hover .dropdown-content{
+            display: block;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form input{
+            background: beige;
+            color: brown;
+            font-size: larger;
+        }
+        form button{
+            border-radius: 5px;
+        }
+        #search{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+        }
+        .searchbtn{
+            background-color: beige;
+            color: brown;
+            font-size: large;
+            margin: 0 10px;
+        }
+
+
+        /* sidenavbar */
+.sidebar {
+  /* height: 100%; */
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  /* top: 0; */
+  left: 0;
+  background-color: beige;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  /* right: 25px; */
+  font-size: 37px;
+  /* margin-left: 50px; */
+}
+
+.openbtn {
+  font-size: 25px;
+  cursor: pointer;
+  background-color: brown;
+  color: white;
+  /* padding: 10px 15px; */
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#smallnav {
+  transition: margin-left .1s;
+  /* padding: 16px; */
+}
+
+@media screen and (min-height: 320px) {
+    .sidebar a {
+        color: beige;
+        background-color: brown;
+    }
+}
+
+
+      /* Media Queries for different screen sizes */
+
+/* Tablet */
+@media (max-width: 769px) {
+    nav {
+        padding: 10px;
+        width: 100%;
+    }
+
+    nav a {
+        display: none;
+        padding: 5px;
+    }
+    
+    .slideshow-container {
+        width: 91%;
+    }
+
+    #brandLogo {
+        width: 55px;
+    }
+  }
+
+  @media (max-width: 425px) {
+.card2 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .card1 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
+
+
+  /* Mobile (Very small screens) */
+@media (max-width: 375px) {
+    /* body {
+        width: 100%;
+    } */
+
+    nav {
+        padding: 10px;
+        width: 100%;
+    }
+
+    nav form {
+       margin-left: 10px;
+    }
+
+    #brandLogo {
+        width: 35px;
+        margin: 0;
+    }
+
+    .searchbtn {
+      margin: 2px;
+    }
+
+    form input {
+      margin: 2px;
+    }
+
+    .slideshow-container {
+        width: 100%;
+    }
+
+  }
+
+  /* Mobile (Extra small devices) */
+@media (max-width: 320px) {
+
+nav {
+    padding: 10px;
+    width: 101%;
+}
+
+.card1 {
+    margin-top: 10px;
+}
+
+.card2 {
+    margin-top: 100px;
+}
+
+nav form .searchbtn{
+    font-size: 15px;
+    padding: 5px;
+}
+
+form input {
+    width: 150px;
+}
+
+#brandLogo {
+    width: 40px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.slideshow-container {
+    width: 100%;
+}
+
+#smallnav {
+    margin: 0;
+    padding: 0;
+}
+
+}
+
+/* Large Screens (Desktop and bigger devices) */
+@media (min-width: 1024px) {
+
+nav {
+    width: 100%;
+}
+
+.slideshow-container {
+    width: 98%;
+}
+
+#smallnav {
+    display: none;
+}
+
+}
+
     </style>
 
 </head>
 <body>
+
+    <nav>
+        <li><img id="brandLogo" src="SmallSquareLogoJpg.jpg" alt="Brand-Logo"></li>
+        <li><a href="e-com.html">HOME</a></li>
+        <li><a href="aboutus.html">ABOUT-US</a></li>
+            <li class="dropdown">
+                <a href="contactus.html">CONTACT-US</a>
+            </li>
+            <li class="dropdown">
+            <a href="#">OUR-PRODUCTS</a>
+            <div class="dropdown-content">
+                <a href="category.html?category=smartphones">Smartphones</a>
+                <a href="category.html?category=groceries">Groceries</a>
+                <a href="category.html?category=skin-care">Skincare</a>
+            </div>
+            </li>
+            <li><a href="cart.html">MY CART</a></li>
+            <li><a href="wishlist.html">WISHLIST</a></li>
+  
+            <form action="search.html">
+                <input type="text" name="query" placeholder="search here">
+                <button class="searchbtn" type="submit">Search</button>
+            </form>
+  
+            <div id="smallnav">
+              <button class="openbtn" onclick="openNav()">☰</button>
+            </div>
+  
+    </nav>
+  
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <li><a href="e-com.html">HOME</a></li>
+      <li><a href="aboutus.html">ABOUT-US</a></li>
+          <li class="dropdown">
+              <a href="contactus.html">CONTACT-US</a>
+          </li>
+          <li class="dropdown">
+          <a href="#">OUR-PRODUCTS</a>
+          <div class="dropdown-content">
+              <a href="category.html?category=smartphones">Smartphones</a>
+              <a href="category.html?category=groceries">Groceries</a>
+              <a href="category.html?category=skin-care">Skincare</a>
+          </div>
+          </li>
+          <li><a href="cart.html">MY CART</a></li>
+          <li><a href="wishlist.html">WISHLIST</a></li>
+    </div>
+
     <h2>CONTACT-US</h2>
     
     <div class="card1">
@@ -48,8 +367,23 @@
     </div>
 
     <div class="card2">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, tempore animi, facilis nesciunt, nisi temporibus sequi minima mollitia laborum nemo consequuntur accusamus ullam distinctio dignissimos eaque placeat. Distinctio, eveniet ratione?<p>
         <img src="contact2.jpg" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, tempore animi, facilis nesciunt, nisi temporibus sequi minima mollitia laborum nemo consequuntur accusamus ullam distinctio dignissimos eaque placeat. Distinctio, eveniet ratione?<p>
     </div>
+
+    <script>
+
+    // sidebar
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+    </script>
+
 </body>
 </html>
