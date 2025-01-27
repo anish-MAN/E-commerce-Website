@@ -578,7 +578,7 @@ form input {
       <label for="address">Address:</label>
       <input type="text" name="address" id="address" required>
       
-      <button type="submit">Submit</button>
+      <button onclick="showMessage()" type="submit">Submit</button>
     </form>
   </div>
   
@@ -698,6 +698,11 @@ form input {
   .then((response) => response.json())
   .then((data) => console.log(data));
 
+      }
+
+
+      function showMessage() {
+        alert("order sucessful");
       }
 
   // sidebar

@@ -123,6 +123,199 @@
             color: beige;
             font-size: 18px;
         }
+
+                    /* sidenavbar */
+.sidebar {
+  /* height: 100%; */
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  /* top: 0; */
+  left: 0;
+  background-color: beige;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  /* right: 25px; */
+  font-size: 37px;
+  /* margin-left: 50px; */
+}
+
+.openbtn {
+  font-size: 25px;
+  cursor: pointer;
+  background-color: brown;
+  color: white;
+  /* padding: 10px 15px; */
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#smallnav {
+  transition: margin-left .1s;
+  /* padding: 16px; */
+}
+
+@media screen and (min-height: 320px) {
+    .sidebar a {
+        color: beige;
+        background-color: brown;
+    }
+}
+
+
+      /* Media Queries for different screen sizes */
+
+/* Tablet */
+@media (max-width: 769px) {
+    nav {
+        padding: 10px;
+        width: 100%;
+    }
+
+    nav a {
+        display: none;
+        padding: 5px;
+    }
+    
+    .slideshow-container {
+        width: 91%;
+    }
+
+    #brandLogo {
+        width: 55px;
+    }
+  }
+
+  /* Mobile */
+@media (max-width: 480px) {
+    nav {
+        padding: 10px;
+        width: 95%;
+    }
+
+    .searchbtn {
+        font-size: 15px;
+        padding: 5px;
+    }
+
+    #brandLogo {
+        width: 50px;
+    }
+
+}
+
+  /* Mobile (Very small screens) */
+@media (max-width: 375px) {
+    /* body {
+        width: 100%;
+    } */
+
+    nav {
+        padding: 10px;
+        width: 100%;
+    }
+
+    /* nav form {
+       margin-left: 10px;
+    } */
+
+    #brandLogo {
+        width: 40px;
+        margin: 0;
+    }
+
+    .searchbtn {
+      margin: 2px;
+    }
+
+    form input {
+      margin: 2px;
+      width: 200px;
+      padding: 0;
+    }
+
+    .slideshow-container {
+        width: 100%;
+    }
+
+  }
+
+  /* Mobile (Extra small devices) */
+@media (max-width: 320px) {
+
+nav {
+    padding: 5px;
+    margin: 0;
+    width: 101%;
+}
+
+nav form .searchbtn{
+    font-size: 15px;
+    padding: 5px;
+}
+
+form input {
+    width: 150px;
+    margin: 0px;
+}
+
+#brandLogo {
+    width: 40px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.slideshow-container {
+    width: 100%;
+}
+
+#smallnav {
+    margin: 0;
+    padding: 0;
+}
+
+}
+
+/* Large Screens (Desktop and bigger devices) */
+@media (min-width: 1024px) {
+
+nav {
+    width: 100%;
+}
+
+.slideshow-container {
+    width: 98%;
+}
+
+#smallnav {
+    display: none;
+}
+
+}
+
     </style>
 </head>
 <body>
@@ -149,7 +342,31 @@
                 <input type="text" name="query" placeholder="search here">
                 <button class="searchbtn" type="submit">Search</button>
             </form>
+
+            <div id="smallnav">
+                <button class="openbtn" onclick="openNav()">☰</button>
+            </div>
+
     </nav>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <li><a href="e-com.html">HOME</a></li>
+        <li><a href="aboutus.html">ABOUT-US</a></li>
+            <li class="dropdown">
+                <a href="contactus.html">CONTACT-US</a>
+            </li>
+            <li class="dropdown">
+            <a href="#">OUR-PRODUCTS</a>
+            <div class="dropdown-content">
+                <a href="category.html?category=smartphones">Smartphones</a>
+                <a href="category.html?category=groceries">Groceries</a>
+                <a href="category.html?category=skin-care">Skincare</a>
+            </div>
+            </li>
+            <li><a href="cart.html">MY CART</a></li>
+            <li><a href="wishlist.html">WISHLIST</a></li>
+      </div>
 
     <div id="products"></div>
     <script>
@@ -216,6 +433,18 @@
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
             alert(`Product ${productId} added to wishlist!`);
         }
+
+    // sidebar
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
     </script>
 </body>
 </html>
